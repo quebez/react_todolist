@@ -7,13 +7,33 @@ import BasicList from './components/basic_list';
 class App extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            items: [{
+                text: '',
+                id: ''
+            }]
+        }
+
+        this.addItem('lol');
+    }
+
+    addItem(text) {
+        const item = {
+            text: text,
+            id: Date.now()
+        };
+
+        console.log(this.state.items);
+
+        this.setState({ items: this.state.items.concat([item]) });
     }
 
 
     render() {
         return (
             <div>
-                <InputBar />
+                <InputBar onEnterPress= { this.addItem }/>
                 <BasicList items={ this.state.items }/>
             </div>
         );

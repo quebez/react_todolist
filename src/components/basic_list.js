@@ -17,6 +17,19 @@ const BasicList = (props) => {
             { items }
         </ul>
     );
+
+    /**
+     *     addItem(text) { //set state when enter is pressed
+        this.setState({
+            items: {
+                text: this.text,
+
+            }
+        });
+        console.log(this.state);
+    }
+    <InputBar onEnterPress= { addItem }/>
+     */
 }
 
 export default BasicList;

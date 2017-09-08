@@ -9,31 +9,14 @@ class App extends Component {
         super(props);
 
         this.state = {
-            items: [{
-                text: '',
-                id: ''
-            }]
+            items: []
         }
-
-        this.addItem('lol');
     }
-
-    addItem(text) {
-        const item = {
-            text: text,
-            id: Date.now()
-        };
-
-        console.log(this.state.items);
-
-        this.setState({ items: this.state.items.concat([item]) });
-    }
-
-
+    
     render() {
         return (
             <div>
-                <InputBar onEnterPress= { this.addItem }/>
+                <InputBar onEnterPress= { item => this.setState({ items: this.state.items.concat([item]) }) }/>
                 <BasicList items={ this.state.items }/>
             </div>
         );

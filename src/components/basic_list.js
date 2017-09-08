@@ -3,7 +3,7 @@ import React from 'react';
 import BasicListItem from './basic_list_item';
 
 const BasicList = (props) => {
-    if (!props.items){
+    if (Object.keys(props.items).length === 0){
         return <div></div>;
     }
 

@@ -9,7 +9,11 @@ class InputBar extends Component {
 
     _HandleKeyPress = (e) => {
         if (e.key === 'Enter') {
-            this.props.onEnterPress(this.state.term);
+            this.props.onEnterPress(
+                {
+                    text: this.state.term,
+                    id: Date.now()
+                });
         }
     }
 

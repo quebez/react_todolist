@@ -12,12 +12,25 @@ class App extends Component {
             items: []
         }
     }
-    
+
     render() {
         return (
             <div>
-                <InputBar onEnterPress= { item => this.setState({ items: this.state.items.concat([item]) }) }/>
-                <BasicList items={ this.state.items }/>
+                <InputBar 
+                onEnterPress={ item => this.setState({ items: this.state.items.concat([item]) }) }
+                />
+                <br/>
+                <BasicList 
+                    items={ this.state.items } 
+                    popItem= { event => {
+                        let items = this.state.items;
+                        console.log(items);
+                        console.log(event.target);
+                        //var index = items.indexOf({ id: idToPop });
+
+                        
+                    } } 
+                />
             </div>
         );
     };

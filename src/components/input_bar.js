@@ -7,13 +7,14 @@ class InputBar extends Component {
         this.state = { term: '' };
     }
 
-    _HandleKeyPress = (e) => {
-        if (e.key === 'Enter') {
+    HandleKeyPress = (event) => {
+        if (event.key === 'Enter') {
             this.props.onEnterPress(
                 {
                     text: this.state.term,
                     id: Date.now()
                 });
+            this.setState({ term: '' });
         }
     }
 
@@ -23,7 +24,7 @@ class InputBar extends Component {
                 <input
                     value={ this.state.term }
                     onChange={ event => this.setState({ term: event.target.value }) }
-                    onKeyPress={ this._HandleKeyPress }
+                    onKeyPress={ this.HandleKeyPress }
                     className="form-control" 
                     id="inputItem" 
                     placeholder="Write your stuff here..."/>

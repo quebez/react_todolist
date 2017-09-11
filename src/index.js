@@ -16,20 +16,17 @@ class App extends Component {
     render() {
         return (
             <div>
-                <InputBar 
-                onEnterPress={ item => this.setState({ items: this.state.items.concat([item]) }) }
+                <InputBar
+                    onEnterPress={item => this.setState({ items: this.state.items.concat([item]) })}
                 />
-                <br/>
-                <BasicList 
-                    items={ this.state.items } 
-                    popItem= { event => {
-                        let items = this.state.items;
-                        console.log(items);
-                        console.log(event.target);
-                        //var index = items.indexOf({ id: idToPop });
-
-                        
-                    } } 
+                <br />
+                <BasicList
+                    items={this.state.items}
+                    popItem={event => {
+                        this.setState({
+                            items: this.state.items.filter(element => element.id != (/\S*\$([0-9]*)/g).exec(event.target.getAttribute('data-reactid'))[1])
+                        });
+                    }}
                 />
             </div>
         );

@@ -22,12 +22,12 @@ class InputBar extends Component {
         return (
             <div>
                 <input
-                    value={ this.state.term }
-                    onChange={ event => this.setState({ term: event.target.value }) }
-                    onKeyPress={ this.HandleKeyPress }
-                    className="form-control" 
-                    id="inputItem" 
-                    placeholder="Write your stuff here..."/>
+                    value={this.state.term}
+                    onChange={event => this.setState({ term: event.target.value })}
+                    onKeyPress={this.HandleKeyPress}
+                    className="form-control"
+                    id="inputItem"
+                    placeholder="Write your stuff here..." />
             </div>
         );
     }

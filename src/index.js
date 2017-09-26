@@ -22,7 +22,7 @@ class App extends Component {
                 <br />
                 <BasicList
                     items={this.state.items}
-                    popItem={event => {
+                    deleteItem={event => {
                         this.setState({
                             items: this.state.items.filter(element => element.id != (/\S*\$([0-9]*)/g).exec(event.target.getAttribute('data-reactid'))[1])
                         });

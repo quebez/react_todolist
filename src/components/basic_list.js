@@ -12,7 +12,7 @@ const BasicList = (props) => {
             <BasicListItem
                 item={item.text}
                 key={item.id}
-                popItem={props.popItem}
+                deleteItem={props.deleteItem}
             />
         );
     }));

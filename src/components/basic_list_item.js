@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 const BasicListItem = (props) => {
     return (
@@ -8,7 +8,7 @@ const BasicListItem = (props) => {
                     <button className="btn btn-default tickButton" onClick=''>
                         <span className="glyphicon glyphicon-ok" aria-hidden="true" />
                     </button>
-                    <button className="btn btn-default deleteButton" onClick={props.popItem}>
+                    <button className="btn btn-default deleteButton" onClick={props.deleteItem}>
                         <span className="glyphicon glyphicon-remove" aria-hidden="true" />
                     </button>
                 </div>

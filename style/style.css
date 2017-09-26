@@ -51,20 +51,24 @@ body {
     padding-right: 10px;
 }
 
-.tickButton {
+button.tickButton {
     background-color: rgba(58, 252, 55, .2);
 }
 
-.deleteButton {
+button.deleteButton {
     background-color: rgba(249, 22, 22, .2);
 }
 
 .list-group-item {
-    background-color: rgba(255, 255, 255, .95);
     word-break: break-all;
 }
 
-.ticked {
+li.ticked {
     text-decoration: line-through;
-    background-color: rgba(163, 163, 163, .95);
+    background-color: rgba(184, 184, 184, 0.77);
+}
+
+li.unticked {
+    text-decoration: none;
+    background-color: rgba(255, 255, 255, 0.87);
 }

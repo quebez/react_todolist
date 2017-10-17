@@ -7,6 +7,7 @@ const BasicList = (props) => {
         return (
             <BasicListItem
                 item={item.text}
+                timeCreated={item.timeCreated}
                 key={item.id}
                 onDeleteClick={props.onDeleteClick}
             />

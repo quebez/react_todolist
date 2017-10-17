@@ -11,7 +11,7 @@ class BasicListItem extends Component {
     render() {
         return (
             <li className={"list-group-item " + this.state.tickUntickItem}>
-                <div className="">
+                <div>
                     <div className="btn-group inlineButtons">
                         <button className="btn btn-default tickButton" onClick={this.toggleTickItem.bind(this)}>
                             <span className="glyphicon glyphicon-ok" aria-hidden="true" />
@@ -21,6 +21,7 @@ class BasicListItem extends Component {
                         </button>
                     </div>
                         {this.props.item}
+                    <div className="itemTimeCreated"> {this.props.timeCreated} </div>
                 </div>
             </li>
         );

@@ -5,13 +5,19 @@ class InputBar extends Component {
 
     HandleKeyPress = (event) => {
         if (event.key === 'Enter') {
+            const currentDate = new Date();
             this.props.onAddItemClick(
                 {
                     text: this.state.term,
-                    id: Date.now()
+                    timeCreated: this.parseTime(currentDate),
+                    id: currentDate.getTime()
                 });
             this.setState({ term: '' });
         }
+    }
+
+    parseTime = (date) => {
+        return `${date.getHours()} : ${date.getMinutes()} : ${date.getSeconds()} : ${date.getMilliseconds()}`;
     }
 
     render() {

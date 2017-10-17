@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
 
 class InputBar extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = { term: '' };
-    }
+    state = { term: '' };
 
     HandleKeyPress = (event) => {
         if (event.key === 'Enter') {
-            this.props.onEnterPress(
+            this.props.onAddItemClick(
                 {
                     text: this.state.term,
                     id: Date.now()

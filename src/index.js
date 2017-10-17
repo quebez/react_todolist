@@ -5,28 +5,36 @@ import InputBar from './components/input_bar';
 import BasicList from './components/basic_list';
 
 class App extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            items: []
-        }
+    state = { items: [] };
+    
+    onDeleteClick = () => {
+        this.setState(this.deleteItem);
     }
+
+    onAddItemClick = (item) => {
+        this.setState(this.addItem(item));
+    }
+
+    deleteItem(state) {
+        const newListItems = this.state.items.filter(element => element.id != (/\S*\$([0-9]*)/g).exec(event.target.getAttribute('data-reactid'))[1])
+        return { ...state, items: newListItems};
+    }
+
+    addItem(item, state) {
+        return {...state, items: this.state.items.concat([item])};
+    }
+
 
     render() {
         return (
             <div>
                 <InputBar
-                    onEnterPress={item => this.setState({ items: this.state.items.concat([item]) })}
+                    onAddItemClick={this.onAddItemClick}
                 />
                 <br />
                 <BasicList
                     items={this.state.items}
-                    deleteItem={event => {
-                        this.setState({
-                            items: this.state.items.filter(element => element.id != (/\S*\$([0-9]*)/g).exec(event.target.getAttribute('data-reactid'))[1])
-                        });
-                    }}
+                    onDeleteClick={this.onDeleteClick}
                 />
             </div>
         );

@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
 
 class BasicListItem extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-           tickUntickItem: 'unticked'
-        }
-    }
+    state = { tickUntickItem: 'unticked' };
 
     toggleTickItem() {
         const css = (this.state.tickUntickItem === 'unticked') ? 'ticked' : 'unticked';
@@ -22,7 +16,7 @@ class BasicListItem extends Component {
                         <button className="btn btn-default tickButton" onClick={this.toggleTickItem.bind(this)}>
                             <span className="glyphicon glyphicon-ok" aria-hidden="true" />
                         </button>
-                        <button className="btn btn-default deleteButton" onClick={this.props.deleteItem}>
+                        <button className="btn btn-default deleteButton" onClick={this.props.onDeleteClick}>
                             <span className="glyphicon glyphicon-remove" aria-hidden="true" />
                         </button>
                     </div>

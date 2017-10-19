@@ -10,7 +10,8 @@ class InputBar extends Component {
                 {
                     text: this.state.term,
                     timeCreated: this.parseTime(currentDate),
-                    id: currentDate.getTime()
+                    id: currentDate.getTime(),
+                    ticked: false
                 });
             this.setState({ term: '' });
         }

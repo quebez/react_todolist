@@ -6,10 +6,10 @@ const BasicList = (props) => {
     const itemsToRender = props.items.map((item => {
         return (
             <BasicListItem
-                item={item.text}
-                timeCreated={item.timeCreated}
+                item={item}
                 key={item.id}
                 onDeleteClick={props.onDeleteClick}
+                onTickClick={props.onTickClick}
             />
         );
     }));

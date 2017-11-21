@@ -3,10 +3,13 @@ import ReactDOM from 'react-dom';
 import update from 'immutability-helper';
 
 import InputBar from './components/input_bar';
-import BasicList from './components/basic_list';
+import List from './components/list';
 
 class App extends Component {
-    state = { items: [] };
+    state = { 
+        items: [],
+        tickedItems: []
+    };
     
 
     onDeleteClick = () => {
@@ -18,12 +21,12 @@ class App extends Component {
     }
 
     onTickClick = () => {
-        //TODO: sort ticked items under unticked items
         this.setState(this.tickItem);
     }
 
+    //TODO: Delete doesn't work on tickedItems
     deleteItem(state) {
-        const newListItems = this.state.items.filter(element => element.id != (/\S*\$([0-9]*)/g).exec(event.target.getAttribute('data-reactid'))[1])
+        const newListItems = this.state.items.filter(element => element.id != (/\S*\$([0-9]*)/g).exec(event.target.getAttribute('data-reactid'))[1]);
         return { ...state, items: newListItems};
     }
 
@@ -31,22 +34,14 @@ class App extends Component {
         return {...state, items: update(this.state.items, {$push: [item]})};
     }
 
-    tickItem(state) { //is there a way to make it easier?
-        const items = this.state.items;
-        const newItem = items.filter(element => element.id == (/\S*\$([0-9]*)/g).exec(event.target.getAttribute('data-reactid'))[1])[0];
-        const index = items.findIndex(element => element.id === newItem.id);
-        newItem.ticked = (newItem.ticked) ? false : true;
-        return {...state, items: update(this.state.items, {$splice: [[index, 1, newItem]]})};
+    //TODO: Make untick real
+    tickItem(state) {
+        let item;
+        item = this.state.items.filter(element => element.id == (/\S*\$([0-9]*)/g).exec(event.target.getAttribute('data-reactid'))[1])[0];
+        item.ticked = true;
+        this.onDeleteClick(event);
+        return {...state, tickedItems: update(this.state.tickedItems, {$unshift: [item]})}
     }
-
-    //UNUSED
-    sortItems(items) {
-        sortedItems = items.sort((a, b) => {
-            return a.id - b.id;
-        });
-        console.log(sortedItems);
-    }
-
 
     render() {
         return (
@@ -55,8 +50,13 @@ class App extends Component {
                     onAddItemClick={this.onAddItemClick}
                 />
                 <br />
-                <BasicList
+                <List
                     items={this.state.items}
+                    onDeleteClick={this.onDeleteClick}
+                    onTickClick={this.onTickClick}
+                />
+                <List
+                    items={this.state.tickedItems}
                     onDeleteClick={this.onDeleteClick}
                     onTickClick={this.onTickClick}
                 />

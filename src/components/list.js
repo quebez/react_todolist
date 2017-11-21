@@ -1,11 +1,11 @@
 import React from 'react';
 
-import BasicListItem from './basic_list_item';
+import ListItem from './list_item';
 
-const BasicList = (props) => {
+const List = (props) => {
     const itemsToRender = props.items.map((item => {
         return (
-            <BasicListItem
+            <ListItem
                 item={item}
                 key={item.id}
                 onDeleteClick={props.onDeleteClick}
@@ -21,4 +21,4 @@ const BasicList = (props) => {
     );
 }
 
-export default BasicList;
+export default List;

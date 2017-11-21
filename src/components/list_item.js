@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class BasicListItem extends Component {
+class ListItem extends Component {
 
     itemTicked() {
         return (this.props.item.ticked) ? 'ticked' : 'unticked';
@@ -26,4 +26,4 @@ class BasicListItem extends Component {
     }
 }
 
-export default BasicListItem;
+export default ListItem;

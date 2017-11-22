@@ -9,7 +9,7 @@ const List = (props) => {
                 item={item}
                 key={item.id}
                 onDeleteClick={props.onDeleteClick}
-                onTickClick={props.onTickClick}
+                onTickUntickClick={props.onTickUntickClick}
             />
         );
     }));

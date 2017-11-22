@@ -20,36 +20,27 @@ class App extends Component {
         this.setState(this.addItem(item));
     }
 
-    onTickClick = (item) => {
-        this.setState(this.tickItem(item));
+    onTickUntickClick = (item) => {
+        this.setState(this.tickUntickItem(item));
     }
 
-    //TODO: Make it better #iDontLikeIt
     deleteItem(item, state) {
-        if (item.ticked) {
-            return { ...state, 
-                tickedItems: this.state.tickedItems.filter(element => {
-                    return element.id !== item.id;
-                })
-            };
-        } else {
-            return { ...state, 
-                items: this.state.items.filter(element => {
-                    return element.id !== item.id;
-                })
-            };
-        };
+        const list = item.ticked ? this.state.tickedItems : this.state.items;
+        const newList = list.filter(element => {
+            return element.id !== item.id;
+        });
+
+        return item.ticked ? { ...state, tickedItems: newList} : { ...state, items: newList};
     }
 
     addItem(item, state) {
         return {...state, items: update(this.state.items, {$push: [item]})};
     }
 
-    //TODO: Make untick real
-    tickItem(item, state) {
+    tickUntickItem(item, state) {
         this.onDeleteClick(item);
-        item.ticked = true;
-        return {...state, tickedItems: update(this.state.tickedItems, {$unshift: [item]})}
+        item.ticked = item.ticked ? false : true;
+        return item.ticked ? {...state, tickedItems: update(this.state.tickedItems, {$unshift: [item]})} : this.addItem(item, state);
     }
 
     render() {
@@ -62,12 +53,12 @@ class App extends Component {
                 <List
                     items={this.state.items}
                     onDeleteClick={this.onDeleteClick}
-                    onTickClick={this.onTickClick}
+                    onTickUntickClick={this.onTickUntickClick}
                 />
                 <List
                     items={this.state.tickedItems}
                     onDeleteClick={this.onDeleteClick}
-                    onTickClick={this.onTickClick}
+                    onTickUntickClick={this.onTickUntickClick}
                 />
             </div>
         );

@@ -6,11 +6,10 @@ import InputBar from './components/input_bar';
 import List from './components/list';
 
 class App extends Component {
-    state = { 
+    state = {
         items: [],
         tickedItems: []
     };
-    
 
     onDeleteClick = (item) => {
         this.setState(this.deleteItem(item));
@@ -30,17 +29,17 @@ class App extends Component {
             return element.id !== item.id;
         });
 
-        return item.ticked ? { ...state, tickedItems: newList} : { ...state, items: newList};
+        return item.ticked ? { ...state, tickedItems: newList } : { ...state, items: newList };
     }
 
     addItem(item, state) {
-        return {...state, items: update(this.state.items, {$push: [item]})};
+        return { ...state, items: update(this.state.items, { $push: [item] }) };
     }
 
     tickUntickItem(item, state) {
         this.onDeleteClick(item);
         item.ticked = item.ticked ? false : true;
-        return item.ticked ? {...state, tickedItems: update(this.state.tickedItems, {$unshift: [item]})} : this.addItem(item, state);
+        return item.ticked ? { ...state, tickedItems: update(this.state.tickedItems, { $unshift: [item] }) } : this.addItem(item, state);
     }
 
     render() {

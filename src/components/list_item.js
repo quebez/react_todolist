@@ -11,10 +11,10 @@ class ListItem extends Component {
             <li className={`list-group-item ${this.itemTicked()}`}>
                 <div>
                     <div className="btn-group inlineButtons">
-                        <button className="btn btn-default tickButton" onClick={this.props.onTickClick}>
+                        <button className="btn btn-default tickButton" onClick={() => {this.props.onTickClick(this.props.item)}}>
                             <span className="glyphicon glyphicon-ok" aria-hidden="true" />
                         </button>
-                        <button className="btn btn-default deleteButton" onClick={this.props.onDeleteClick}>
+                        <button className="btn btn-default deleteButton" onClick={() => {this.props.onDeleteClick(this.props.item)}}>
                             <span className="glyphicon glyphicon-remove" aria-hidden="true" />
                         </button>
                     </div>

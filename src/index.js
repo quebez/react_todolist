@@ -12,22 +12,33 @@ class App extends Component {
     };
     
 
-    onDeleteClick = () => {
-        this.setState(this.deleteItem);
+    onDeleteClick = (item) => {
+        this.setState(this.deleteItem(item));
     }
 
     onAddItemClick = (item) => {
         this.setState(this.addItem(item));
     }
 
-    onTickClick = () => {
-        this.setState(this.tickItem);
+    onTickClick = (item) => {
+        this.setState(this.tickItem(item));
     }
 
-    //TODO: Delete doesn't work on tickedItems
-    deleteItem(state) {
-        const newListItems = this.state.items.filter(element => element.id != (/\S*\$([0-9]*)/g).exec(event.target.getAttribute('data-reactid'))[1]);
-        return { ...state, items: newListItems};
+    //TODO: Make it better #iDontLikeIt
+    deleteItem(item, state) {
+        if (item.ticked) {
+            return { ...state, 
+                tickedItems: this.state.tickedItems.filter(element => {
+                    return element.id !== item.id;
+                })
+            };
+        } else {
+            return { ...state, 
+                items: this.state.items.filter(element => {
+                    return element.id !== item.id;
+                })
+            };
+        };
     }
 
     addItem(item, state) {
@@ -35,11 +46,9 @@ class App extends Component {
     }
 
     //TODO: Make untick real
-    tickItem(state) {
-        let item;
-        item = this.state.items.filter(element => element.id == (/\S*\$([0-9]*)/g).exec(event.target.getAttribute('data-reactid'))[1])[0];
+    tickItem(item, state) {
+        this.onDeleteClick(item);
         item.ticked = true;
-        this.onDeleteClick(event);
         return {...state, tickedItems: update(this.state.tickedItems, {$unshift: [item]})}
     }
 

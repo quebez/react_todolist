@@ -43,7 +43,7 @@ body {
     border-radius: 5px;
 }
 
-.alerts {
+.messages {
     height: 80px;
 }
 
@@ -61,6 +61,8 @@ button.deleteButton {
 
 .list-group-item {
     word-break: break-all;
+    width: 90%;
+    margin-left: 5%;
 }
 
 li.ticked {
@@ -77,4 +79,9 @@ div.itemTimeCreated {
     color: #6B6B6B;
     float: right;
     font-size: 10px;
+}
+
+input.input-bar {
+    width: 80%;
+    margin-left: 10%;
 }

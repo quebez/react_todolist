@@ -4,6 +4,7 @@ import update from 'immutability-helper';
 
 import InputBar from './components/input_bar';
 import List from './components/list';
+import Messages from './components/messages';
 
 class App extends Component {
     state = {
@@ -45,20 +46,25 @@ class App extends Component {
     render() {
         return (
             <div>
-                <InputBar
-                    onAddItemClick={this.onAddItemClick}
-                />
-                <br />
-                <List
-                    items={this.state.items}
-                    onDeleteClick={this.onDeleteClick}
-                    onTickUntickClick={this.onTickUntickClick}
-                />
-                <List
-                    items={this.state.tickedItems}
-                    onDeleteClick={this.onDeleteClick}
-                    onTickUntickClick={this.onTickUntickClick}
-                />
+                <div className='messages'>
+                    <Messages />
+                </div>
+                <div id='content'>
+                    <InputBar
+                        onAddItemClick={this.onAddItemClick}
+                    />
+                    <br />
+                    <List
+                        items={this.state.items}
+                        onDeleteClick={this.onDeleteClick}
+                        onTickUntickClick={this.onTickUntickClick}
+                    />
+                    <List
+                        items={this.state.tickedItems}
+                        onDeleteClick={this.onDeleteClick}
+                        onTickUntickClick={this.onTickUntickClick}
+                    />
+                </div>
             </div>
         );
     };

@@ -18,7 +18,15 @@ class InputBar extends Component {
     }
 
     parseTime = (date) => {
-        return `${date.getHours()} : ${date.getMinutes()} : ${date.getSeconds()} : ${date.getMilliseconds()}`;
+        const addZero = (number) => {
+            return number < 10 ? '0'+number : number;
+        }
+
+        return `
+            ${addZero(date.getHours())} : 
+            ${addZero(date.getMinutes())} : 
+            ${addZero(date.getSeconds())}
+        `;
     }
 
     render() {
@@ -28,7 +36,7 @@ class InputBar extends Component {
                     value={this.state.term}
                     onChange={event => this.setState({ term: event.target.value })}
                     onKeyPress={this.HandleKeyPress}
-                    className="form-control"
+                    className="form-control input-bar"
                     id="inputItem"
                     placeholder="Write your stuff here..." />
             </div>

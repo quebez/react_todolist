@@ -6,13 +6,12 @@ class InputBar extends Component {
     HandleKeyPress = (event) => {
         if (event.key === 'Enter') {
             const currentDate = new Date();
-            this.props.onAddItemClick(
-                {
+            this.props.onAddItemClick({
                     text: this.state.term,
                     timeCreated: this.parseTime(currentDate),
                     id: currentDate.getTime(),
                     ticked: false
-                });
+                }, 1);
             this.setState({ term: '' });
         }
     }

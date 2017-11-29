@@ -36,18 +36,19 @@ body {
     }
 }
 
-#content {
+.content {
     background-color: rgba(255, 255, 255, .15);
     padding-top: 2%;
     padding-bottom: 1%;
-    border-radius: 5px;
 }
 
 .messages {
+    margin-left: 10%;
     height: 80px;
+    width: 80%;
 }
 
-.inlineButtons {
+.btn-group {
     padding-right: 10px;
 }
 
@@ -59,7 +60,7 @@ button.deleteButton {
     background-color: rgba(249, 22, 22, .2);
 }
 
-.list-group-item {
+li.list-group-item {
     word-break: break-all;
     width: 90%;
     margin-left: 5%;
@@ -85,3 +86,7 @@ input.input-bar {
     width: 80%;
     margin-left: 10%;
 }
+
+* {
+    border-radius: 0 !important;
+  }

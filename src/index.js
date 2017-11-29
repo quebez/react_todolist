@@ -6,22 +6,39 @@ import InputBar from './components/input_bar';
 import List from './components/list';
 import Messages from './components/messages';
 
+let timeoutId;
+
 class App extends Component {
     state = {
         items: [],
-        tickedItems: []
+        tickedItems: [],
+        messageId: 0
     };
 
     onDeleteClick = (item) => {
         this.setState(this.deleteItem(item));
+        this.deleteMessageAfterTimeout();
     }
 
-    onAddItemClick = (item) => {
-        this.setState(this.addItem(item));
+    onAddItemClick = (item, messageId) => {
+        this.setState(this.addItem(item, messageId));
+        this.deleteMessageAfterTimeout();
     }
 
     onTickUntickClick = (item) => {
         this.setState(this.tickUntickItem(item));
+        this.deleteMessageAfterTimeout();
+    }
+
+    deleteMessageAfterTimeout = (state) => {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => {this.setState({...state, messageId: 0})}, 5000);
+    }
+
+
+
+    addItem(item, messageId, state) {
+        return { ...state, items: update(this.state.items, { $push: [item] }), messageId};
     }
 
     deleteItem(item, state) {
@@ -30,26 +47,24 @@ class App extends Component {
             return element.id !== item.id;
         });
 
-        return item.ticked ? { ...state, tickedItems: newList } : { ...state, items: newList };
-    }
-
-    addItem(item, state) {
-        return { ...state, items: update(this.state.items, { $push: [item] }) };
+        return item.ticked ? { ...state, tickedItems: newList, messageId: 3 } : { ...state, items: newList, messageId: -3 };
     }
 
     tickUntickItem(item, state) {
         this.onDeleteClick(item);
         item.ticked = item.ticked ? false : true;
-        return item.ticked ? { ...state, tickedItems: update(this.state.tickedItems, { $unshift: [item] }) } : this.addItem(item, state);
+        return item.ticked ? { ...state, tickedItems: update(this.state.tickedItems, { $unshift: [item] }), messageId: 2 } : this.addItem(item, -2, state);
     }
 
     render() {
         return (
             <div>
                 <div className='messages'>
-                    <Messages />
+                    <Messages 
+                        messageId={this.state.messageId}
+                    />
                 </div>
-                <div id='content'>
+                <div className='content'>
                     <InputBar
                         onAddItemClick={this.onAddItemClick}
                     />

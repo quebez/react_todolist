@@ -3,17 +3,16 @@ import React, { Component } from 'react';
 class InputBar extends Component {
     state = { term: '' };
 
-    HandleKeyPress = (event) => {
-        if (event.key === 'Enter') {
-            const currentDate = new Date();
-            this.props.onAddItemClick({
-                    text: this.state.term,
-                    timeCreated: this.parseTime(currentDate),
-                    id: currentDate.getTime(),
-                    ticked: false
-                }, 1);
-            this.setState({ term: '' });
-        }
+    HandleSubmitEvent = (event) => {
+        event.preventDefault();
+        const currentDate = new Date();
+        this.props.onAddItemClick({
+                text: this.state.term,
+                timeCreated: this.parseTime(currentDate),
+                id: currentDate.getTime(),
+                ticked: false
+            }, 1);
+        this.setState({ term: '' });
     }
 
     parseTime = (date) => {
@@ -30,15 +29,14 @@ class InputBar extends Component {
 
     render() {
         return (
-            <div>
+            <form onSubmit={this.HandleSubmitEvent.bind(this)}>
                 <input
                     value={this.state.term}
                     onChange={event => this.setState({ term: event.target.value })}
-                    onKeyPress={this.HandleKeyPress}
                     className="form-control input-bar"
                     id="inputItem"
                     placeholder="Write your stuff here..." />
-            </div>
+            </form>
         );
     }
 }
